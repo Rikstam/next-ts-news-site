@@ -23,6 +23,13 @@ app.get("/posts/:id", (req, res) => {
     const post = posts.find(({ id }: Post) => String(id) === wantedId)
     return res.json(post)
 })
+
+app.get("/categories/:name", (req, res) => {
+    const { name } = req.params
+    const found = posts.filter(({ category }: Post) => category === name)
+    const categoryPosts = [...found, ...found, ...found]
+    return res.json(categoryPosts)
+})
 app.listen(port, () =>
     console.log(`DB is running on http://localhost:${port}!`)
 )
