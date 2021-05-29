@@ -24,3 +24,5 @@ export type Comment = {
     time: RelativeTime
     post: EntityId
 }
+
+export type Optional<TEntity> = TEntity | null
