@@ -1,11 +1,14 @@
 import React from "react";
 import Head from "next/head";
+import { AppContext } from "next/app";
 import { ThemeProvider } from "styled-components";
 
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
 import { Center } from "../components/Center/style";
 import { GlobalStyle, theme } from "../shared/theme";
+
+import { store } from "../store";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -25,4 +28,10 @@ const MyApp = ({ Component, pageProps }) => {
   );
 };
 
-export default MyApp;
+MyApp.getInitialProps = async ({ Component, ctx }: AppContext) => ({
+  pageProps: {
+    ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+  },
+});
+
+export default store.withRedux(MyApp);
