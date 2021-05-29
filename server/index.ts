@@ -5,6 +5,7 @@ import { Post } from "../shared/types"
 
 const categories = require("./categories.json")
 const posts = require("./posts.json")
+const comments = require("./comments.json")
 const app = express()
 
 app.use(cors())
@@ -30,6 +31,13 @@ app.get("/categories/:name", (req, res) => {
     const categoryPosts = [...found, ...found, ...found]
     return res.json(categoryPosts)
 })
+
+app.get("/comments/:post", (req, res) => {
+    const postId = Number(req.params.post)
+    const found = comments.filter(({ post }) => post === postId)
+    return res.json(found)
+})
+
 app.listen(port, () =>
     console.log(`DB is running on http://localhost:${port}!`)
 )
