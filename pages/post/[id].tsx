@@ -13,6 +13,8 @@ import { Loader } from "../../components/Loader/Loader";
 import { PostBody } from "../../components/Post/PostBody";
 import { Comments } from "../../components/Comments/Comments";
 
+// instead of passing it right in Post component’s props we dispatch() actions,
+// that update our store with this data.
 export const getServerSideProps = store.getServerSideProps(
   async ({ store, params }) => {
     if (typeof params.id !== "string") {
